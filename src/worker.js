@@ -162,7 +162,7 @@ async function streamFromOpenRouter(prompt, apiKey, writer, encoder) {
       if (done) break;
       
       const chunk = decoder.decode(value);
-      const lines = chunk.split('\\n');
+      const lines = chunk.split('\n');
       
       for (const line of lines) {
         if (line.startsWith('data: ')) {
@@ -182,7 +182,7 @@ async function streamFromOpenRouter(prompt, apiKey, writer, encoder) {
       }
     }
   } catch (error) {
-    await writer.write(encoder.encode(`\\n\\nError: ${error.message}`));
+    await writer.write(encoder.encode(`\n\nError: ${error.message}`));
   } finally {
     await writer.close();
   }
@@ -208,7 +208,7 @@ async function fetchGithubContent(githubUrl) {
         
         const response = await fetch(rawUrl);
         const content = await response.text();
-        return `\\n\\n---\\nGitHub File: ${filePath}\\n---\\n${content}\\n`;
+        return `\n\n---\nGitHub File: ${filePath}\n---\n${content}\n`;
       }
       
       // For repo URLs, fetch README
@@ -217,13 +217,13 @@ async function fetchGithubContent(githubUrl) {
       
       if (response.ok) {
         const content = await response.text();
-        return `\\n\\n---\\nGitHub Repository: ${owner}/${repo}\\n---\\n${content}\\n`;
+        return `\n\n---\nGitHub Repository: ${owner}/${repo}\n---\n${content}\n`;
       }
     }
     
-    return `\\n\\n---\\nGitHub URL: ${githubUrl}\\n---\\n[Unable to fetch content]\\n`;
+    return `\n\n---\nGitHub URL: ${githubUrl}\n---\n[Unable to fetch content]\n`;
   } catch (error) {
-    return `\\n\\n---\\nGitHub URL: ${githubUrl}\\n---\\nError: ${error.message}\\n`;
+    return `\n\n---\nGitHub URL: ${githubUrl}\n---\nError: ${error.message}\n`;
   }
 }
 
@@ -312,12 +312,12 @@ async function handleAutocomplete(url, env, corsHeaders) {
 
 // Utility functions
 function extractUrls(text) {
-  const urlRegex = /https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/g;
+  const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
   return text.match(urlRegex) || [];
 }
 
 function extractTags(text) {
-  const tagRegex = /#[\\w\\/\\.\\-]+/g;
+  const tagRegex = /#[\w\/\.\-]+/g;
   return text.match(tagRegex) || [];
 }
 

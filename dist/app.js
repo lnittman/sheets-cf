@@ -53,7 +53,7 @@ class SheetsApp {
       }
     } else if (value.includes('#')) {
       // Update autocomplete based on current tag
-      const match = value.slice(0, e.target.selectionStart).match(/#([\\w\\/\\.\\-]*)$/);
+      const match = value.slice(0, e.target.selectionStart).match(/#([\w\/\.\-]*)$/);
       if (match) {
         const query = match[1];
         const response = await fetch(`/api/autocomplete?q=${encodeURIComponent(query)}`);
@@ -84,7 +84,7 @@ class SheetsApp {
         const after = value.slice(position - 1);
         
         // Replace the # and partial path with the full path
-        const newValue = before + '#' + file + ' ' + after.replace(/^#[\\w\\/\\.\\-]*/, '');
+        const newValue = before + '#' + file + ' ' + after.replace(/^#[\w\/\.\-]*/, '');
         this.promptInput.value = newValue;
         this.promptInput.focus();
         this.hideAutocomplete();
@@ -105,7 +105,7 @@ class SheetsApp {
     }
     
     // Check for URLs
-    const urlRegex = /https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/g;
+    const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
     const urls = prompt.match(urlRegex);
     
     if (!urls || urls.length === 0) {
