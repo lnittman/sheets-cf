@@ -1,0 +1,14 @@
+name = "sheets-cf-worker"
+main = "src/worker.js"
+compatibility_date = "2025-01-15"
+
+[vars]
+OPENROUTER_API_KEY = "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"
+
+[[kv_namespaces]]
+binding = "CONTEXT_KV"
+id = "6981fea7f7334ae2a6016efe3d06265a"
+preview_id = "6981fea7f7334ae2a6016efe3d06265a"
+
+[env.production]
+vars = { OPENROUTER_API_KEY = "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" }
