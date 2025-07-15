@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sheets - Developer Report Generator</title>
+  <title>sheets - github-powered prompt engineering</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -11,55 +11,165 @@
     <header class="header">
       <div class="logo">sheets</div>
       <nav class="nav">
-        <a href="/" class="nav-link active">Home</a>
-        <a href="/rules" class="nav-link">Rules</a>
-        <a href="/docs" class="nav-link">Docs</a>
+        <a href="/" class="nav-link active">home</a>
+        <a href="/sheets" class="nav-link">my sheets</a>
+        <a href="/discover" class="nav-link">discover</a>
+        <a href="/rules" class="nav-link">context</a>
       </nav>
+      <div class="auth-section">
+        <button id="github-auth" class="github-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          <span id="auth-text">connect github</span>
+        </button>
+      </div>
     </header>
     
     <main class="main">
       <div class="container">
-        <div class="console">
-          <div class="console-header">
-            <span class="console-title">Developer Report Generator</span>
-            <span class="console-subtitle">v0.3.8 | moonshotai/kimi-k2-instruct</span>
-          </div>
-          
-          <div class="input-section">
-            <div class="input-label">
-              <span class="icon">@</span>
-              <span>analyze my codebase</span>
+        <div class="hero-section">
+          <h1 class="hero-title">prompt engineering meets github</h1>
+          <p class="hero-subtitle">analyze repos, discover patterns, generate beautiful markdown sheets for your LLM workflows</p>
+        </div>
+
+        <div class="quick-actions">
+          <button class="action-card" onclick="showRepoAnalyzer()">
+            <span class="action-icon">🔍</span>
+            <span class="action-title">analyze repository</span>
+            <span class="action-desc">deep dive into any github repo</span>
+          </button>
+          <button class="action-card" onclick="showMyRepos()">
+            <span class="action-icon">📚</span>
+            <span class="action-title">my repositories</span>
+            <span class="action-desc">analyze your own code</span>
+          </button>
+          <button class="action-card" onclick="showDiscovery()">
+            <span class="action-icon">🌟</span>
+            <span class="action-title">discover projects</span>
+            <span class="action-desc">find repos matching your stack</span>
+          </button>
+          <button class="action-card" onclick="showPromptBuilder()">
+            <span class="action-icon">✨</span>
+            <span class="action-title">prompt builder</span>
+            <span class="action-desc">craft perfect LLM prompts</span>
+          </button>
+        </div>
+
+        <div id="main-content">
+          <!-- Repo Analyzer -->
+          <div id="repo-analyzer" class="console">
+            <div class="console-header">
+              <span class="console-title">repository analyzer</span>
+              <span class="console-subtitle">paste a github URL or search for a repo</span>
             </div>
-            <textarea 
-              id="prompt" 
-              class="prompt-input" 
-              placeholder="Enter a URL and prompt... Use #file/path to reference context files"
-              rows="4"
-            ></textarea>
-            <div class="input-hints" id="autocomplete"></div>
-            <button id="generate" class="generate-btn">
-              <span class="icon">></span>
-              Generate Report
-            </button>
-          </div>
-          
-          <div class="output-section">
-            <div class="output-header">
-              <span class="icon">ls</span>
-              <span id="status">Ready</span>
+            
+            <div class="input-section">
+              <div class="input-label">
+                <span class="icon">@</span>
+                <span>analyze repository</span>
+              </div>
+              <div class="input-group">
+                <input 
+                  id="repo-search" 
+                  class="prompt-input" 
+                  placeholder="owner/repo or https://github.com/owner/repo"
+                  autocomplete="off"
+                />
+                <select id="analysis-type" class="analysis-select">
+                  <option value="overview">overview & architecture</option>
+                  <option value="security">security audit</option>
+                  <option value="patterns">patterns & practices</option>
+                  <option value="improvements">improvement suggestions</option>
+                  <option value="learning">learning resources</option>
+                  <option value="comparison">compare with my code</option>
+                </select>
+              </div>
+              <div class="input-hints" id="repo-suggestions"></div>
+              <div class="button-group">
+                <button id="analyze-btn" class="generate-btn">
+                  <span class="icon">></span>
+                  generate sheet
+                </button>
+                <button id="save-as-template" class="secondary-btn">
+                  save as template
+                </button>
+              </div>
             </div>
-            <pre id="output" class="output"></pre>
+            
+            <div class="output-section">
+              <div class="output-header">
+                <span class="icon">📄</span>
+                <span id="status">ready</span>
+                <div class="output-actions">
+                  <button class="icon-btn" onclick="copySheet()" title="copy markdown">📋</button>
+                  <button class="icon-btn" onclick="downloadSheet()" title="download">💾</button>
+                  <button class="icon-btn" onclick="shareSheet()" title="share">🔗</button>
+                </div>
+              </div>
+              <div id="output" class="output markdown-body"></div>
+            </div>
+          </div>
+
+          <!-- My Repos -->
+          <div id="my-repos" class="console" style="display: none;">
+            <div class="console-header">
+              <span class="console-title">your repositories</span>
+              <span class="console-subtitle">analyze and understand your code</span>
+            </div>
+            <div class="repo-grid" id="user-repos">
+              <div class="loading">loading your repositories...</div>
+            </div>
+          </div>
+
+          <!-- Discovery -->
+          <div id="discovery" class="console" style="display: none;">
+            <div class="console-header">
+              <span class="console-title">discover repositories</span>
+              <span class="console-subtitle">find projects that match your tech stack</span>
+            </div>
+            <div class="discovery-filters">
+              <input type="text" placeholder="react, typescript, tailwind..." class="prompt-input" id="tech-filter">
+              <button class="generate-btn">find similar repos</button>
+            </div>
+            <div class="repo-grid" id="discovered-repos">
+              <div class="loading">ready to discover...</div>
+            </div>
+          </div>
+
+          <!-- Prompt Builder -->
+          <div id="prompt-builder" class="console" style="display: none;">
+            <div class="console-header">
+              <span class="console-title">prompt template builder</span>
+              <span class="console-subtitle">create reusable analysis templates</span>
+            </div>
+            <div class="template-builder">
+              <input type="text" placeholder="template name" class="prompt-input" id="template-name">
+              <textarea 
+                id="template-prompt" 
+                class="prompt-input" 
+                rows="10"
+                placeholder="create your analysis template...
+
+example:
+analyze {{REPO_URL}} focusing on:
+- architecture patterns
+- code quality metrics
+- {{CUSTOM_FOCUS}}
+
+include context from #standards/react.md"
+              ></textarea>
+              <button class="generate-btn">save template</button>
+            </div>
           </div>
         </div>
-        
-        <div class="examples">
-          <h3>Example Prompts:</h3>
-          <ul>
-            <li>Analyze https://github.com/user/repo and suggest architectural improvements</li>
-            <li>Review this codebase for security vulnerabilities: https://example.com/repo</li>
-            <li>Extract useful patterns from https://github.com/popular/framework #standards/react.md</li>
-            <li>Compare our approach #architecture/api.md with https://github.com/best/practices</li>
-          </ul>
+
+        <!-- Recent Sheets -->
+        <div class="recent-sheets">
+          <h3>recent sheets</h3>
+          <div id="recent-sheets-list" class="sheets-list">
+            <div class="empty-state">no sheets yet - analyze a repo to get started</div>
+          </div>
         </div>
       </div>
     </main>

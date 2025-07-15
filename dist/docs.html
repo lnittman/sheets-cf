@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Documentation | Sheets</title>
+  <title>documentation | sheets</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -11,9 +11,10 @@
     <header class="header">
       <div class="logo">sheets</div>
       <nav class="nav">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/rules" class="nav-link">Rules</a>
-        <a href="/docs" class="nav-link active">Docs</a>
+        <a href="/" class="nav-link">home</a>
+        <a href="/" class="nav-link">my sheets</a>
+        <a href="/" class="nav-link">discover</a>
+        <a href="/rules" class="nav-link">context</a>
       </nav>
     </header>
     
@@ -21,80 +22,111 @@
       <div class="container">
         <div class="console">
           <div class="console-header">
-            <span class="console-title">Documentation</span>
-            <span class="console-subtitle">Learn how to use Sheets</span>
+            <span class="console-title">documentation</span>
+            <span class="console-subtitle">everything you need to know about sheets</span>
           </div>
           
           <div class="output-section">
-            <div class="output" style="max-height: none;">
-              <h1>Sheets Developer Tool</h1>
+            <div class="output markdown-body" style="max-height: none;">
+              <h1>sheets - github-powered prompt engineering</h1>
               
-              <p>Sheets is a developer report generator that performs deep analysis on codebases and URLs using AI. It's built entirely on Cloudflare's platform and uses OpenRouter with moonshotai/kimi-k2 for intelligent analysis.</p>
+              <p>sheets transforms github repositories into beautiful, AI-generated markdown documents perfect for LLM context. analyze any codebase, discover patterns, and create reusable prompt templates.</p>
               
-              <h2>Features</h2>
+              <h2>key features</h2>
+              
+              <h3>🔍 deep repository analysis</h3>
               <ul>
-                <li>Deep codebase analysis for any URL</li>
-                <li>Special GitHub repository analysis</li>
-                <li>Context-aware reports using your developer standards</li>
-                <li>Interactive file tagging with # syntax</li>
-                <li>Streaming responses for long-running analysis</li>
+                <li>comprehensive architecture overview</li>
+                <li>security audits and vulnerability detection</li>
+                <li>pattern extraction and best practices</li>
+                <li>improvement suggestions</li>
+                <li>learning guides from real code</li>
+                <li>comparison with your coding style</li>
               </ul>
               
-              <h2>Getting Started</h2>
-              
-              <h3>1. Upload Your Context</h3>
-              <p>Visit the <a href="/rules.html">Rules</a> page to upload your developer context files. These can include:</p>
+              <h3>🔗 github integration</h3>
               <ul>
-                <li>Coding standards and style guides</li>
-                <li>Architecture documentation</li>
-                <li>Best practices and patterns</li>
-                <li>Project-specific requirements</li>
+                <li>connect your github account</li>
+                <li>analyze private repositories</li>
+                <li>browse all your repos instantly</li>
+                <li>discover similar projects</li>
               </ul>
               
-              <h3>2. Generate Reports</h3>
-              <p>On the main page, enter a prompt that includes at least one URL. Examples:</p>
-              <pre><code>Analyze https://github.com/user/repo and suggest improvements based on #standards/react.md
-
-Review this codebase for security issues: https://example.com/repo
-
-Extract useful patterns from https://github.com/popular/library #architecture/microservices.md</code></pre>
-              
-              <h3>3. Use File Tags</h3>
-              <p>Reference your context files using the # syntax:</p>
+              <h3>📄 sheets management</h3>
               <ul>
-                <li>Type # to see all available files</li>
-                <li>Continue typing to filter results</li>
-                <li>Click or press Enter to complete the tag</li>
+                <li>save analyses as "sheets"</li>
+                <li>beautiful markdown formatting</li>
+                <li>copy to clipboard for LLM context</li>
+                <li>download as markdown files</li>
+                <li>share via links (coming soon)</li>
               </ul>
               
-              <h2>API Integration</h2>
-              
-              <p>Sheets uses OpenRouter with the moonshotai/kimi-k2 model for analysis. To deploy your own instance:</p>
-              
-              <ol>
-                <li>Get an API key from <a href="https://openrouter.ai" target="_blank">OpenRouter</a></li>
-                <li>Create a Cloudflare KV namespace</li>
-                <li>Update wrangler.toml with your credentials</li>
-                <li>Deploy using: <code>npm run deploy-worker && npm run deploy-pages</code></li>
-              </ol>
-              
-              <h2>Keyboard Shortcuts</h2>
+              <h3>🎯 context-aware analysis</h3>
               <ul>
-                <li><code>Ctrl + Enter</code> - Generate report</li>
-                <li><code>#</code> - Trigger file autocomplete</li>
-                <li><code>Esc</code> - Close file editor</li>
+                <li>upload your coding standards</li>
+                <li>reference files with #tags</li>
+                <li>personalized recommendations</li>
+                <li>consistent with your practices</li>
               </ul>
               
-              <h2>Tips</h2>
+              <h2>getting started</h2>
+              
+              <h3>1. connect github (optional)</h3>
+              <p>click "connect github" to analyze private repos and save your sheets. you can still analyze public repos without connecting.</p>
+              
+              <h3>2. analyze a repository</h3>
+              <p>enter any github URL or repo name (owner/repo) and choose an analysis type:</p>
               <ul>
-                <li>For GitHub repos, the tool automatically fetches README and file contents</li>
-                <li>Upload comprehensive context files for better analysis</li>
-                <li>Use specific prompts for targeted analysis</li>
-                <li>Reports are streamed in real-time - longer analysis provides more detail</li>
+                <li><strong>overview & architecture</strong> - comprehensive project analysis</li>
+                <li><strong>security audit</strong> - vulnerability and security review</li>
+                <li><strong>patterns & practices</strong> - extract reusable patterns</li>
+                <li><strong>improvement suggestions</strong> - actionable recommendations</li>
+                <li><strong>learning resources</strong> - educational guide from the code</li>
+                <li><strong>compare with my code</strong> - see how it differs from your style</li>
               </ul>
               
-              <h2>Open Source</h2>
-              <p>Sheets is open source. View the code and contribute on <a href="https://github.com/lnittman/sheets-cf" target="_blank">GitHub</a>.</p>
+              <h3>3. use context files</h3>
+              <p>upload your coding standards, architecture docs, or style guides in the <a href="/rules">context</a> section. reference them in any analysis with #tags.</p>
+              
+              <h3>4. manage your sheets</h3>
+              <p>all your analyses are saved as sheets. copy them directly into any LLM conversation for instant context about codebases.</p>
+              
+              <h2>use cases</h2>
+              
+              <h3>for learning</h3>
+              <p>analyze popular open source projects to understand their architecture and patterns. generate learning guides that explain complex codebases.</p>
+              
+              <h3>for code reviews</h3>
+              <p>run security audits and best practice checks on any repository. get actionable suggestions for improvements.</p>
+              
+              <h3>for development</h3>
+              <p>extract patterns from well-built projects. discover how others solve similar problems. find libraries and tools worth adopting.</p>
+              
+              <h3>for LLM workflows</h3>
+              <p>generate perfect context documents for AI assistants. each sheet is optimized for LLM consumption with clear structure and relevant details.</p>
+              
+              <h2>tips & tricks</h2>
+              
+              <ul>
+                <li>use specific analysis types for focused results</li>
+                <li>upload your team's coding standards for consistent recommendations</li>
+                <li>analyze competitor repos to understand their approach</li>
+                <li>save sheets as templates for repeated analyses</li>
+                <li>combine multiple sheets for comprehensive project context</li>
+              </ul>
+              
+              <h2>keyboard shortcuts</h2>
+              <ul>
+                <li><code>cmd/ctrl + enter</code> - run analysis</li>
+                <li><code>#</code> - trigger context file autocomplete</li>
+                <li><code>cmd/ctrl + k</code> - quick search (coming soon)</li>
+              </ul>
+              
+              <h2>privacy & security</h2>
+              <p>your sheets and context files are private to your account. repository analysis happens server-side with secure API access. we never store repository code - only the generated analysis.</p>
+              
+              <h2>open source</h2>
+              <p>sheets is built with cloudflare workers, pages, and D1. view the source on <a href="https://github.com/lnittman/sheets-cf" target="_blank">github</a>.</p>
             </div>
           </div>
         </div>
@@ -106,12 +138,9 @@ Extract useful patterns from https://github.com/popular/library #architecture/mi
     // Handle navigation
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', (e) => {
-        if (link.getAttribute('href') === '/') {
+        if (link.getAttribute('href') === '/' || link.textContent !== 'context') {
           e.preventDefault();
           window.location.href = '/';
-        } else if (link.getAttribute('href') === '/rules') {
-          e.preventDefault();
-          window.location.href = '/rules.html';
         }
       });
     });
