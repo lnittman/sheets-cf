@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rules - Developer Context | Sheets</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">sheets</div>
+      <nav class="nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/rules" class="nav-link active">Rules</a>
+        <a href="/docs" class="nav-link">Docs</a>
+      </nav>
+    </header>
+    
+    <main class="main">
+      <div class="container">
+        <div class="console">
+          <div class="console-header">
+            <span class="console-title">Developer Context Manager</span>
+            <span class="console-subtitle">Manage your rules and standards</span>
+          </div>
+          
+          <div class="upload-section">
+            <h3>Upload Context Files</h3>
+            <div class="upload-form">
+              <input type="file" id="fileInput" class="file-input" multiple>
+              <input type="text" id="pathInput" placeholder="Optional: custom path (e.g., standards/react.md)" class="prompt-input" style="max-width: 300px;">
+              <button id="uploadBtn" class="upload-btn">Upload</button>
+            </div>
+            <div id="uploadStatus" style="margin-top: 1rem; font-size: 0.875rem; color: #666;"></div>
+          </div>
+        </div>
+        
+        <div class="console">
+          <div class="console-header">
+            <span class="console-title">File Tree</span>
+            <span class="console-subtitle" id="fileCount">0 files</span>
+          </div>
+          
+          <div class="filetree" id="filetree">
+            <div class="loading">Loading files...</div>
+          </div>
+        </div>
+        
+        <div id="fileEditor" class="file-editor" style="display: none;">
+          <div class="editor-header">
+            <span class="editor-title" id="editorTitle">Edit File</span>
+            <div>
+              <button class="file-action" onclick="saveFile()">Save</button>
+              <button class="file-action" onclick="closeEditor()">Close</button>
+            </div>
+          </div>
+          <textarea id="editorContent" class="editor-content"></textarea>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script src="/rules.js"></script>
+</body>
+</html>

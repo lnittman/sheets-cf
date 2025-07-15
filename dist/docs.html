@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation | Sheets</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">sheets</div>
+      <nav class="nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/rules" class="nav-link">Rules</a>
+        <a href="/docs" class="nav-link active">Docs</a>
+      </nav>
+    </header>
+    
+    <main class="main">
+      <div class="container">
+        <div class="console">
+          <div class="console-header">
+            <span class="console-title">Documentation</span>
+            <span class="console-subtitle">Learn how to use Sheets</span>
+          </div>
+          
+          <div class="output-section">
+            <div class="output" style="max-height: none;">
+              <h1>Sheets Developer Tool</h1>
+              
+              <p>Sheets is a developer report generator that performs deep analysis on codebases and URLs using AI. It's built entirely on Cloudflare's platform and uses OpenRouter with moonshotai/kimi-k2 for intelligent analysis.</p>
+              
+              <h2>Features</h2>
+              <ul>
+                <li>Deep codebase analysis for any URL</li>
+                <li>Special GitHub repository analysis</li>
+                <li>Context-aware reports using your developer standards</li>
+                <li>Interactive file tagging with # syntax</li>
+                <li>Streaming responses for long-running analysis</li>
+              </ul>
+              
+              <h2>Getting Started</h2>
+              
+              <h3>1. Upload Your Context</h3>
+              <p>Visit the <a href="/rules.html">Rules</a> page to upload your developer context files. These can include:</p>
+              <ul>
+                <li>Coding standards and style guides</li>
+                <li>Architecture documentation</li>
+                <li>Best practices and patterns</li>
+                <li>Project-specific requirements</li>
+              </ul>
+              
+              <h3>2. Generate Reports</h3>
+              <p>On the main page, enter a prompt that includes at least one URL. Examples:</p>
+              <pre><code>Analyze https://github.com/user/repo and suggest improvements based on #standards/react.md
+
+Review this codebase for security issues: https://example.com/repo
+
+Extract useful patterns from https://github.com/popular/library #architecture/microservices.md</code></pre>
+              
+              <h3>3. Use File Tags</h3>
+              <p>Reference your context files using the # syntax:</p>
+              <ul>
+                <li>Type # to see all available files</li>
+                <li>Continue typing to filter results</li>
+                <li>Click or press Enter to complete the tag</li>
+              </ul>
+              
+              <h2>API Integration</h2>
+              
+              <p>Sheets uses OpenRouter with the moonshotai/kimi-k2 model for analysis. To deploy your own instance:</p>
+              
+              <ol>
+                <li>Get an API key from <a href="https://openrouter.ai" target="_blank">OpenRouter</a></li>
+                <li>Create a Cloudflare KV namespace</li>
+                <li>Update wrangler.toml with your credentials</li>
+                <li>Deploy using: <code>npm run deploy-worker && npm run deploy-pages</code></li>
+              </ol>
+              
+              <h2>Keyboard Shortcuts</h2>
+              <ul>
+                <li><code>Ctrl + Enter</code> - Generate report</li>
+                <li><code>#</code> - Trigger file autocomplete</li>
+                <li><code>Esc</code> - Close file editor</li>
+              </ul>
+              
+              <h2>Tips</h2>
+              <ul>
+                <li>For GitHub repos, the tool automatically fetches README and file contents</li>
+                <li>Upload comprehensive context files for better analysis</li>
+                <li>Use specific prompts for targeted analysis</li>
+                <li>Reports are streamed in real-time - longer analysis provides more detail</li>
+              </ul>
+              
+              <h2>Open Source</h2>
+              <p>Sheets is open source. View the code and contribute on <a href="https://github.com/lnittman/sheets-cf" target="_blank">GitHub</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    // Handle navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (link.getAttribute('href') === '/') {
+          e.preventDefault();
+          window.location.href = '/';
+        } else if (link.getAttribute('href') === '/rules') {
+          e.preventDefault();
+          window.location.href = '/rules.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

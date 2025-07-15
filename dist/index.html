@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheets - Developer Report Generator</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">sheets</div>
+      <nav class="nav">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="/rules" class="nav-link">Rules</a>
+        <a href="/docs" class="nav-link">Docs</a>
+      </nav>
+    </header>
+    
+    <main class="main">
+      <div class="container">
+        <div class="console">
+          <div class="console-header">
+            <span class="console-title">Developer Report Generator</span>
+            <span class="console-subtitle">v0.3.8 | moonshotai/kimi-k2-instruct</span>
+          </div>
+          
+          <div class="input-section">
+            <div class="input-label">
+              <span class="icon">@</span>
+              <span>analyze my codebase</span>
+            </div>
+            <textarea 
+              id="prompt" 
+              class="prompt-input" 
+              placeholder="Enter a URL and prompt... Use #file/path to reference context files"
+              rows="4"
+            ></textarea>
+            <div class="input-hints" id="autocomplete"></div>
+            <button id="generate" class="generate-btn">
+              <span class="icon">></span>
+              Generate Report
+            </button>
+          </div>
+          
+          <div class="output-section">
+            <div class="output-header">
+              <span class="icon">ls</span>
+              <span id="status">Ready</span>
+            </div>
+            <pre id="output" class="output"></pre>
+          </div>
+        </div>
+        
+        <div class="examples">
+          <h3>Example Prompts:</h3>
+          <ul>
+            <li>Analyze https://github.com/user/repo and suggest architectural improvements</li>
+            <li>Review this codebase for security vulnerabilities: https://example.com/repo</li>
+            <li>Extract useful patterns from https://github.com/popular/framework #standards/react.md</li>
+            <li>Compare our approach #architecture/api.md with https://github.com/best/practices</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script src="/app.js"></script>
+</body>
+</html>
