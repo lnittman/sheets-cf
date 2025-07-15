@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>sheets - ai-powered github analysis</title>
+  <link rel="stylesheet" href="/style-new.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0a0a0a">
+</head>
+<body>
+  <div class="app">
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="logo">sheets</div>
+      <nav class="desktop-nav">
+        <a href="#home" class="active">home</a>
+        <a href="#sheets">sheets</a>
+        <a href="#discover">discover</a>
+        <a href="#context">context</a>
+      </nav>
+      <div class="actions">
+        <button class="icon-btn" id="search-btn" title="search">
+          <span>🔍</span>
+        </button>
+        <button class="icon-btn" id="github-btn" title="github">
+          <span>👤</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="mobile-main">
+      <!-- Home View -->
+      <div id="home-view" class="home-view fade-in">
+        <div class="welcome-section">
+          <h1 class="welcome-title">welcome to sheets</h1>
+          <p class="welcome-subtitle">analyze repos. discover patterns. generate beautiful docs.</p>
+        </div>
+
+        <!-- Quick Input -->
+        <div class="sheet-input">
+          <div class="input-header">
+            <span class="icon">✨</span>
+            <span class="label">what would you like to analyze?</span>
+          </div>
+          <textarea 
+            id="quick-prompt" 
+            class="prompt-input" 
+            placeholder="paste a github url, type a repo name, or describe what you want to analyze...
+
+examples:
+- https://github.com/vercel/next.js
+- analyze my react patterns
+- compare stripe/stripe-node with my payment integration
+- security audit for owner/repo"
+            rows="4"
+          ></textarea>
+          <div class="context-tags" id="context-tags">
+            <!-- Dynamically populated -->
+          </div>
+          <button id="quick-generate" class="generate-btn">
+            generate sheet
+          </button>
+        </div>
+
+        <!-- Command Grid -->
+        <div class="command-grid" id="command-grid">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Recent Sheets -->
+        <section class="recent-section">
+          <h2 class="section-title">recent sheets</h2>
+          <div id="recent-sheets" class="sheets-list">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+      </div>
+
+      <!-- Sheet Detail View -->
+      <div id="sheet-view" class="sheet-detail" style="display: none;">
+        <div class="sheet-header">
+          <h1 class="sheet-title" id="sheet-title">Loading...</h1>
+          <div class="sheet-meta">
+            <span id="sheet-date">-</span>
+            <span>•</span>
+            <span id="sheet-repo">-</span>
+          </div>
+        </div>
+        <div class="sheet-actions">
+          <button class="icon-btn" onclick="copySheet()">📋</button>
+          <button class="icon-btn" onclick="shareSheet()">🔗</button>
+          <button class="icon-btn" onclick="downloadSheet()">💾</button>
+        </div>
+        <div class="sheet-content markdown-body" id="sheet-content">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text" style="width: 80%;"></div>
+        </div>
+      </div>
+
+      <!-- Sheets List View -->
+      <div id="sheets-view" class="sheets-view" style="display: none;">
+        <div class="view-header">
+          <h1 class="view-title">your sheets</h1>
+          <button class="icon-btn" onclick="showFilters()">⚙️</button>
+        </div>
+        <div id="sheets-list" class="sheets-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Discover View -->
+      <div id="discover-view" class="discover-view" style="display: none;">
+        <div class="view-header">
+          <h1 class="view-title">discover repositories</h1>
+        </div>
+        <div class="discover-search">
+          <input 
+            type="text" 
+            id="discover-query" 
+            class="search-input" 
+            placeholder="search by tech stack, patterns, or topics..."
+          />
+        </div>
+        <div id="discover-results" class="repo-grid">
+          <div class="empty-state">
+            <div class="empty-icon">🔮</div>
+            <div class="empty-title">ready to explore</div>
+            <div class="empty-desc">search for repos that match your interests</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Context View -->
+      <div id="context-view" class="context-view" style="display: none;">
+        <div class="view-header">
+          <h1 class="view-title">developer context</h1>
+          <button class="icon-btn" onclick="uploadContext()">➕</button>
+        </div>
+        <div class="context-info">
+          <p>upload your coding standards, patterns, and guidelines to enhance sheet generation</p>
+        </div>
+        <div id="context-files" class="context-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Bar -->
+    <nav class="mobile-bottom-bar">
+      <a href="#home" class="nav-item active">
+        <span class="icon">🏠</span>
+        <span class="label">home</span>
+      </a>
+      <a href="#sheets" class="nav-item">
+        <span class="icon">📄</span>
+        <span class="label">sheets</span>
+      </a>
+      <a href="#discover" class="nav-item">
+        <span class="icon">🔮</span>
+        <span class="label">discover</span>
+      </a>
+      <a href="#context" class="nav-item">
+        <span class="icon">📚</span>
+        <span class="label">context</span>
+      </a>
+    </nav>
+
+    <!-- Floating Action Button -->
+    <button class="fab" id="fab" style="display: none;">
+      <span>✨</span>
+    </button>
+  </div>
+
+  <!-- GitHub Auth Modal -->
+  <div id="github-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>connect github</h2>
+      <p>sign in to analyze your repositories and access advanced features</p>
+      <button class="github-connect-btn" onclick="connectGitHub()">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        continue with github
+      </button>
+    </div>
+  </div>
+
+  <script src="/app-new.js"></script>
+</body>
+</html>
