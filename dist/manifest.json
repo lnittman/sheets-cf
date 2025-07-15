@@ -1,0 +1,39 @@
+{
+  "name": "Sheets - AI-Powered GitHub Analysis",
+  "short_name": "Sheets",
+  "description": "Analyze repos, discover patterns, generate beautiful documentation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["developer", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "label": "Home screen showing command cards"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "label": "Sheet detail view with markdown content"
+    }
+  ]
+}
