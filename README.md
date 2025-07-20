@@ -1,6 +1,12 @@
-# Sheets - Developer Report Generator
+<div align="center">
+  <img src="https://v3.fal.media/files/koala/d8pPylqJHk1Xk7x8mFjK2.png" alt="sheets-cf logo" width="80" height="80">
+  
+  # sheets-cf
+  
+  **cloudflare-based developer report generator with ai-driven analysis**
+</div>
 
-A minimalist, Cloudflare-based web application for generating AI-driven developer reports from URLs and codebases.
+<br>
 
 ![Sheets](https://img.shields.io/badge/Built%20with-Cloudflare-orange)
 ![License](https://img.shields.io/badge/license-MIT-blue)
